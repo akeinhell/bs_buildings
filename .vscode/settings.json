@@ -1,0 +1,7 @@
+{
+    "mocha.files.glob": "tests/**/*.js",
+    "mocha.requires": [
+        "@babel/register"
+    ],
+    "circleci.apiKey": "df1773c29b13191b77890090fb7b0153d0cba3ad"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.001" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2018-12-04T08:30:29" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="should have keys with coefficients" timestamp="2018-12-04T08:30:29" tests="1" file="/storage/projects/github/libs/bs_buildings/tests/resolve.spec.js" failures="0" time="0.001">
+    <testcase name="should have keys with coefficients test" time="0.001" classname="test">
+    </testcase>
+  </testsuite>
+</testsuites>

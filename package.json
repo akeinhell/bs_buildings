@@ -1,0 +1,43 @@
+{
+    "name": "@akeinhell/bs_buildings",
+    "version": "1.0.0",
+    "description": "calc bastion siege buildings",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "mocha --require @babel/register ./tests/**/*.spec.js",
+        "test:ci": "mocha --require @babel/register ./tests/**/*.spec.js --reporter mocha-junit-reporter",
+        "lint:ci": "eslint ./src --format junit --output-file ./reports/eslint/eslint.xml",
+        "test:watch": "mocha --watch --require @babel/register ./tests/**/*.spec.js",
+        "build": "npm run test && eslint ./src && npm run docs && npm run compile ",
+        "compile": "babel src --out-dir ./dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:akeinhell/bs_buildings.git"
+    },
+    "directories": {
+        "lib": "dist"
+    },
+    "keywords": [
+        "bastion siege"
+    ],
+    "author": "Aleksey Dorokhov",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "^7.1.2",
+        "@babel/core": "^7.1.2",
+        "@babel/plugin-proposal-class-properties": "^7.2.0",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/register": "^7.0.0",
+        "babel-eslint": "^10.0.1",
+        "chai": "^4.2.0",
+        "chai-json-schema-ajv": "^3.0.0",
+        "eslint": "^5.8.0",
+        "eslint-config-prettier": "^3.3.0",
+        "mocha": "^5.2.0",
+        "mocha-junit-reporter": "^1.18.0"
+    },
+    "dependencies": {
+        "lodash": "^4.17.11"
+    }
+}
