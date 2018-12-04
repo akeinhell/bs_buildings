@@ -9,7 +9,8 @@
         "lint:ci": "eslint ./src --format junit --output-file ./reports/eslint/eslint.xml",
         "lint": "eslint ./src",
         "test:watch": "mocha --watch --require @babel/register ./tests/**/*.spec.js",
-        "build": "npm run test && eslint ./src && npm run docs && npm run compile ",
+        "build": "npm run test && eslint ./src && npm run compile && npm run publish",
+        "publish": "exit 0",
         "compile": "babel src --out-dir ./dist"
     },
     "repository": {
