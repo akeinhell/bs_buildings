@@ -1,5 +1,3 @@
-import {coefficients} from './constants';
-
 export class Building {
     alias = null;
     current = 0;
