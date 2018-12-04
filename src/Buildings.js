@@ -29,11 +29,10 @@ export default class Buildings {
         });
 
         if (calc) {
-            BUILDINGS.forEach(alias => {
-                if (!this.alias) {
-                    this[alias] = this.findMaxLevel(alias);
-                }
-            });
+            if (!this.storage) {
+                this.resolveStorage();
+            }
+            BUILDINGS.filter(b => !this[b]).forEach(alias => this[alias] = this.findMaxLevel(alias));
         }
     }
 
@@ -46,23 +45,19 @@ export default class Buildings {
         const a = 50;
         const b = 1000;
         const c = -maxResource;
-        this.storage = Math.floor(-b / 2 / a + Math.pow(Math.pow(b, 2) - 4 * a * c, 0.5) / 2 / a);
+        this.storage = Math.floor(
+            -b / 2 / a + Math.pow(Math.pow(b, 2) - 4 * a * c, 0.5) / 2 / a
+        );
     }
 
     findMaxLevel(alias) {
-        if (!this.storage) {
-            this.resolveStorage();
-        }
-
         let current = 0;
         const capacity = this.storageCapacity();
         while (this.calc(alias, current, current + 1) < capacity) {
             current++;
         }
 
-        this[alias] = current;
-
-        return this;
+        return current;
     }
 
     calc(alias, current, target) {
@@ -123,14 +118,18 @@ export default class Buildings {
      * @returns {number}
      */
     storageCapacity() {
-        return 0;
+        if (!this.storage) {
+            throw new Error('storage is unresolved');
+        }
+
+        return (this.storage * 50 + 1000) * this.storage;
     }
 
     /**
      * @returns {number}
      */
     towerCapacity() {
-        return 0;
+        throw new Error('[towerCapacity] not implemented');
     }
 
     maxLevels(buildings) {
