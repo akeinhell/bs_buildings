@@ -1,4 +1,4 @@
-import {BUILDINGS} from './constants';
+import { BUILDINGS, STORAGE, coefficients } from './constants';
 
 /**
  * @typedef {'storage'|'house'} BuildingAlias
@@ -16,9 +16,9 @@ export default class Buildings {
     ballista = null;
 
     /**
-     * 
-     * @param {Object} values 
-     * @param {boolean} calc 
+     *
+     * @param {Object} values
+     * @param {boolean} calc
      */
     constructor(values = {}, calc = false) {
         Object.entries(values).forEach(([key, value]) => {
@@ -31,14 +31,51 @@ export default class Buildings {
         if (calc) {
             BUILDINGS.forEach(alias => {
                 if (!this.alias) {
-                    this[alias] = this.calc(alias);
+                    this[alias] = this.findMaxLevel(alias);
                 }
             });
         }
     }
 
-    calc(alias) {
+    resolveStorage() {
+        // TODO sort and find biggest
+        const maxResource = Object.entries(this)
+            .filter(([, v]) => v)
+            .map(([k, v]) => this.calc(k, v - 1, v));
 
+        const a = 50;
+        const b = 1000;
+        const c = -maxResource;
+        this.storage = Math.floor(-b / 2 / a + Math.pow(Math.pow(b, 2) - 4 * a * c, 0.5) / 2 / a);
+    }
+
+    findMaxLevel(alias) {
+        if (!this.storage) {
+            this.resolveStorage();
+        }
+
+        let current = 0;
+        const capacity = this.storageCapacity();
+        while (this.calc(alias, current, current + 1) < capacity) {
+            current++;
+        }
+
+        this[alias] = current;
+
+        return this;
+    }
+
+    calc(alias, current, target) {
+        const { wood, stone } = coefficients[alias];
+        const coefficient = Math.max(wood, stone);
+
+        const res =
+            (1 / 6) *
+            coefficient *
+            (target * (target + 1) * (target + 2) -
+                current * (current + 1) * (current + 2));
+
+        return Math.round(res);
     }
 
     /**
@@ -59,9 +96,12 @@ export default class Buildings {
     static fromGold(value) {
         const tower = Math.round(value / 500000);
 
-        return new Buildings({
-            tower
-        }, true);
+        return new Buildings(
+            {
+                tower,
+            },
+            true
+        );
     }
 
     /**
