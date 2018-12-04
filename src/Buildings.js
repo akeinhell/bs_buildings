@@ -1,4 +1,4 @@
-import { BUILDINGS, STORAGE, coefficients } from './constants';
+import { BUILDINGS, coefficients } from './constants';
 
 /**
  * @typedef {'storage'|'house'} BuildingAlias
@@ -85,6 +85,7 @@ export default class Buildings {
      * @returns { Buildings }
      */
     static fromBuilding(alias, value) {
+        alias = value;
         return new Buildings();
     }
 
@@ -115,7 +116,7 @@ export default class Buildings {
      * @returns {number}
      */
     moneyIncome(buffs = {}) {
-        return 0;
+        return buffs ? 0 : -1;
     }
 
     /**
@@ -132,7 +133,9 @@ export default class Buildings {
         return 0;
     }
 
-    maxLevels(buildings) {}
+    maxLevels(buildings) {
+        return buildings;
+    }
 
     /**
      *
@@ -140,6 +143,6 @@ export default class Buildings {
      * @param {boolean} format
      */
     estimatedTime(alias, format = false) {
-        return 0;
+        return 0 && format;
     }
 }
