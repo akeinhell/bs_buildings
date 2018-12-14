@@ -1,6 +1,4 @@
-import {REHYDRATE} from 'redux-persist/constants'
 import {createActions, FAIL, REQUEST, SUCCESS} from '../common'
-import {initializeGa} from '../log/index'
 import {saveUserInfo} from '../persist/index'
 import {Reducer} from 'redux'
 
@@ -13,11 +11,6 @@ export const reducer: Reducer<SystemState> = (state = defaultState, action) => {
       return {
         ...state,
         boot: true
-      }
-    case REHYDRATE:
-      return {
-        ...state,
-        reHydrated: true
       }
     default:
       return state
@@ -42,14 +35,15 @@ export function session() {
     dispatch({type: SESSION[REQUEST]})
     try {
       const userInfo: any = await (async _ => {
-        throw new Error('write session manging code')
+        return {
+          user: 1,
+          name: 2
+        }
       })()
       dispatch({type: SESSION[SUCCESS]})
       dispatch(saveUserInfo(userInfo))
-      dispatch(initializeGa(userInfo.id))
     } catch (ex) {
       dispatch({type: SESSION[FAIL]})
-      dispatch(initializeGa())
     } finally {
       dispatch(boot())
     }

@@ -1,8 +1,15 @@
 import * as React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { DEV, SENTRY_TRACKING_ID } from '../src/constants/env';
+import {Layout} from '../src/components/Layout/Layout'
 
-export default class extends Document {
+interface Props {
+    scopes: any;
+}
+
+interface State {}
+
+export default class extends Document<Props, State> {
     static async getInitialProps(...args) {
         const documentProps = await Document.getInitialProps(...args);
         const { req, renderPage } = args[0];
@@ -59,7 +66,9 @@ export default class extends Document {
                     )}
                 </Head>
                 <body>
-                    <Main />
+                    <Layout>
+                        <Main />
+                    </Layout>
                     <NextScript />
                 </body>
             </html>

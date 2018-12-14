@@ -1,5 +1,4 @@
 import * as React from 'react'
-import {Nav} from '../Nav/Nav'
 import { Menu } from 'semantic-ui-react'
 
 
@@ -14,7 +13,7 @@ export class Header extends React.Component {
     return (
       <Menu stackable>
         <Menu.Item>
-          <img src='/logo.png' />
+            <img src='/logo.png' />
         </Menu.Item>
 
         <Menu.Item

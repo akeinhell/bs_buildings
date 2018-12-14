@@ -1,8 +1,8 @@
 export function createActions(actionType: string): [string, string, string] {
     return [
-        `request ${actionType}`,
-        `success ${actionType}`,
-        `fail ${actionType}`,
+        `${actionType}/request`,
+        `${actionType}/success`,
+        `${actionType}/fail`,
     ];
 }
 

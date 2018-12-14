@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import Head from 'next/head';
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react';
 import * as styles from './styles.css';
 
 export const Layout: React.FunctionComponent = props => (
@@ -14,9 +14,9 @@ export const Layout: React.FunctionComponent = props => (
             />
         </Head>
         <Header />
-        <Grid columns={4}>
-            <Grid.Row className={styles.content}>
-                <Grid.Column color={"green"} floated={"left"} width={2}>
+        <Grid columns={2} className={styles.content}>
+            <Grid.Row>
+                <Grid.Column color={'green'} floated={'left'} width={2}>
                     <Image src="/images/wireframe/paragraph.png" />
                 </Grid.Column>
                 <Grid.Column width={12} textAlign={'left'} floated={'left'}>
@@ -25,6 +25,5 @@ export const Layout: React.FunctionComponent = props => (
                 </Grid.Column>
             </Grid.Row>
         </Grid>
-
     </div>
 );
